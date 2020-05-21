@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <UserInfo />
+    <router-view />
   </div>
 </template>
 
 <script>
 // import $ from 'jquery'
-import UserInfo from './components/UserInfo'
+import $ from 'jquery'
 export default {
   name: 'App',
-  components: {
-    UserInfo
-  },
   data () {
     return {}
+  },
+  mounted () {
+    $(document).ready(function () {
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active')
+      })
+    })
   }
 }
 </script>

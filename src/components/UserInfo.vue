@@ -102,7 +102,7 @@
                 </select>
               </div>
             </fieldset>
-            <button id="btn" type="submit" class="btn col" @click="login2()">ورود به پرسشنامه</button>
+            <button id="btn" type="submit" class="btn col" @click="goToSurvey()">ورود به پرسشنامه</button>
           </form>
         </div>
       </div>
@@ -127,7 +127,13 @@ export default {
     }
   },
   methods: {
-    created () {}
+    created () {},
+    goToSurvey () {
+      this.$router.push({ name: 'Survey' })
+    },
+    onSubmit () {
+      console.log('---------sdsd---------')
+    }
   }
 }
 </script>
