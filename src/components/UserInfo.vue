@@ -6,14 +6,14 @@
           <form class="mb-4" v-on:submit.prevent="onSubmit">
             <fieldset class="mb-2">
               <legend>اطلاعات شخصی</legend>
-               <div class="form-group">
+              <div class="form-group">
                 <label for="userId">شماره دانشجویی :</label>
                 <input
                   id="userId"
                   class="form-control"
                   type="text"
                   placeholder="شماره دانشجویی خود را وارد کنید "
-                  v-model="userId"
+                  v-model="userInfo.userId"
                   required
                 />
               </div>
@@ -24,7 +24,7 @@
                   class="form-control"
                   type="text"
                   placeholder="نام خود را وارد کنید "
-                  v-model="firstName"
+                  v-model="userInfo.firstName"
                   required
                 />
               </div>
@@ -35,7 +35,7 @@
                   class="form-control"
                   type="text"
                   placeholder="نام خانوادگی خود را وارد کنید "
-                  v-model="lastName"
+                  v-model="userInfo.lastName"
                   required
                 />
               </div>
@@ -46,7 +46,7 @@
                   class="form-control"
                   type="text"
                   placeholder="رشته تحصیلی خود را وارد کنید "
-                  v-model="major"
+                  v-model="userInfo.major"
                   required
                 />
               </div>
@@ -57,18 +57,18 @@
                   class="form-control"
                   type="text"
                   placeholder="سن خود را وارد کنید "
-                  v-model="age"
+                  v-model="userInfo.age"
                   required
                 />
               </div>
-               <div class="form-group">
+              <div class="form-group">
                 <label for="engPerc">درصد زبان انگلیسی در کنکور :</label>
                 <input
                   id="engPerc"
                   class="form-control"
                   type="text"
                   placeholder="درصد زبان انگلیسی خود را وارد کنید "
-                  v-model="engPerc"
+                  v-model="userInfo.engPerc"
                   required
                 />
               </div>
@@ -79,21 +79,21 @@
                   class="form-control"
                   type="text"
                   placeholder="استان محل تحصیل دبیرستان خود را وارد کنید "
-                  v-model="province"
+                  v-model="userInfo.province"
                   required
                 />
               </div>
               <div class="form-group">
                 <label for="gender">جنسیت :</label>
-                <select class="form-control" v-model="gender">
+                <select class="form-control" v-model="userInfo.gender">
                   <option disabled value>جنسیت خود را انتخاب کنید</option>
                   <option>مرد</option>
                   <option>زن</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="year">سال چندم دانشگاه هستید؟ </label>
-                <select class="form-control" v-model="year">
+                <label for="year">سال چندم دانشگاه هستید؟</label>
+                <select class="form-control" v-model="userInfo.year">
                   <option disabled value>سال تحصیلی خود را انتخاب کنید</option>
                   <option>اول</option>
                   <option>دوم</option>
@@ -102,7 +102,7 @@
                 </select>
               </div>
             </fieldset>
-            <button id="btn" type="submit" class="btn col" @click="goToSurvey()">ورود به پرسشنامه</button>
+            <button id="btn" type="submit" class="btn col" @click="sendUserInfo()">ورود به پرسشنامه</button>
           </form>
         </div>
       </div>
@@ -111,19 +111,22 @@
 </template>
 
 <script>
+const axios = require('axios')
 export default {
   name: 'UserInfo',
   data () {
     return {
-      userId: '',
-      firstName: '',
-      lastName: '',
-      major: '',
-      age: '',
-      gender: '',
-      engPerc: '',
-      year: '',
-      province: ''
+      userInfo: {
+        userId: '',
+        firstName: '',
+        lastName: '',
+        major: '',
+        age: '',
+        gender: '',
+        engPerc: '',
+        year: '',
+        province: ''
+      }
     }
   },
   methods: {
@@ -133,6 +136,33 @@ export default {
     },
     onSubmit () {
       console.log('---------sdsd---------')
+    },
+    sendUserInfo () {
+      const userInfo = {
+        userId: this.userInfo.userId,
+        firstName: this.userInfo.firstName,
+        lastName: this.userInfo.lastName,
+        major: this.userInfo.major,
+        age: this.userInfo.age,
+        gender: this.userInfo.gender,
+        engPerc: this.userInfo.engPerc,
+        year: this.userInfo.year,
+        province: this.userInfo.province
+      }
+      const options = {
+        method: 'POST',
+        url: 'http://localhost:8080/personalInfo',
+        data: userInfo
+      }
+      axios(options)
+        .then(result => {
+          console.log('------------------', result)
+          this.goToSurvey()
+        })
+        .catch(err => {
+          console.log('------------------', err)
+          alert('خطا در ارسال اطلاعات کاربر به سرور.')
+        })
     }
   }
 }
