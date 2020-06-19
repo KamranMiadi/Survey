@@ -1,17 +1,21 @@
 <template>
   <div id="Survey">
-    <div class="guide pt-3 pb-3 col-2 mr-4 mt-4">
-      <label for="guid">راهنمای گزینه ها</label>
-      <ul id="guide">
-        <li
-          v-for="(item, index) in questions[currentQuizName + 'Guide']"
-          v-bind:key="index"
-        >{{ item }}</li>
-      </ul>
+    <div class="guide pt-3 pb-3 col-6 col-sm-3 mr-4 mt-4">
+      <b-button v-b-toggle.sidebar-1 >راهنمای گزینه ها</b-button>
+      <b-sidebar id="sidebar-1" title="راهنما" right bg-variant="dark" text-variant="light" shadow>
+        <label for="guid">راهنمای گزینه ها</label>
+        <ul id="guide">
+          <li
+            v-for="(item, index) in questions[currentQuizName + 'Guide']"
+            v-bind:key="index"
+          >{{ item }}</li>
+        </ul>
+      </b-sidebar>
     </div>
+
     <div class="container main-container">
       <div class="row align-items-center justify-content-center" style="height: 700px;">
-        <div id="form" class="border-0 col-6 col-lg-10 pb-4 pt-4 mt-4 mb-4">
+        <div id="form" class="border-0 col-9 col-sm-10 col-lg-10 pb-4 pt-4 mt-4 mb-4">
           <form class="mb-4" v-on:submit.prevent="onSubmit">
             <fieldset class="mb-2">
               <legend>{{questions[currentQuizName + 'Header']}}</legend>
@@ -47,6 +51,8 @@
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   name: 'Survey',
   data () {
@@ -2939,7 +2945,6 @@ export default {
 }
 
 .guide {
-  position: fixed;
   background-color: chocolate;
   border-radius: 20px;
 }

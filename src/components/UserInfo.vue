@@ -2,7 +2,7 @@
   <div id="UserInfo">
     <div class="container main-container">
       <div class="row align-items-center justify-content-center" style="height: 700px;">
-        <div id="form" class="border-0 col-6 col-lg-6">
+        <div id="form" class="border-0 col-lg-6 col-sm-8">
           <form class="mb-4" v-on:submit.prevent="onSubmit">
             <fieldset class="mb-2">
               <legend>اطلاعات شخصی</legend>
@@ -39,16 +39,13 @@
                   required
                 />
               </div>
-              <div class="form-group">
+                 <div class="form-group">
                 <label for="major">رشته تحصیلی :</label>
-                <input
-                  id="major"
-                  class="form-control"
-                  type="text"
-                  placeholder="رشته تحصیلی خود را وارد کنید "
-                  v-model="userInfo.major"
-                  required
-                />
+                <select class="form-control" v-model="userInfo.major">
+                  <option disabled value>رشته تحصیلی خود را انتخاب کنید</option>
+                  <option>مهندسی</option>
+                  <option>پزشکی</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="age">سن :</label>
@@ -101,6 +98,54 @@
                   <option>اخر</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label for="accessToMedia">آیا به برنامه های رادیویی و تلویزیونی انگلیسی دسترسی دارید؟</label>
+                <select class="form-control" v-model="userInfo.accessToMedia">
+                  <option disabled value>انتخاب کنید</option>
+                  <option>بله</option>
+                  <option>خیر</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="accessToEngMen"> در خارج از کلاس چندبار با یک انگلیسی زبان ارتباط داشته اید؟</label>
+                <select class="form-control" v-model="userInfo.accessToEngMen">
+                  <option disabled value>انتخاب کنید</option>
+                  <option>اصلا</option>
+                  <option>خیلی کم</option>
+                  <option>گاهی اوقات</option>
+                  <option>اغلب </option>
+                  <option>خیلی زیاد</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="accessToMedia"> آیا تا به حال به کشورهای انگلیسی زبان سفر کرده یا در آن ها زندگی کرده اید؟</label>
+                <select class="form-control" v-model="userInfo.hasTraveled">
+                  <option disabled value>انتخاب کنید</option>
+                  <option>بله</option>
+                  <option>خیر</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="startedAt"> چه زمانی شروع به یادگیری زبان انگلیسی کرده اید؟</label>
+                <select class="form-control" v-model="userInfo.startedLearningAt">
+                  <option disabled value>انتخاب کنید</option>
+                  <option>پیش دبستانی</option>
+                  <option>مدرسه ابتدایی</option>
+                  <option>راهنمایی</option>
+                  <option>سال اول دبیرستان</option>
+                </select>
+              </div>
+                <div class="form-group">
+                <label for="learningTime">چند سال است که در حال یادگیری زبان انگلیسی هستید؟</label>
+                <input
+                  id="learningTime"
+                  class="form-control"
+                  type="text"
+                  placeholder=""
+                  v-model="userInfo.learningTime"
+                  required
+                />
+              </div>
             </fieldset>
             <button id="btn" type="submit" class="btn col" @click="sendUserInfo()">ورود به پرسشنامه</button>
           </form>
@@ -125,7 +170,12 @@ export default {
         gender: '',
         engPerc: '',
         year: '',
-        province: ''
+        province: '',
+        accessToMedia: '',
+        accessToEngMen: '',
+        hasTraveled: '',
+        startedLearningAt: '',
+        learningTime: ''
       }
     }
   },
