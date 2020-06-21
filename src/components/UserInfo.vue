@@ -197,7 +197,12 @@ export default {
         gender: this.userInfo.gender,
         engPerc: this.userInfo.engPerc,
         year: this.userInfo.year,
-        province: this.userInfo.province
+        province: this.userInfo.province,
+        accessToMedia: this.userInfo.accessToMedia,
+        accessToEngMen: this.userInfo.accessToEngMen,
+        hasTraveled: this.userInfo.hasTraveled,
+        startedLearningAt: this.userInfo.startedLearningAt,
+        learningTime: this.userInfo.learningTime
       }
       const options = {
         method: 'POST',
@@ -207,6 +212,7 @@ export default {
       axios(options)
         .then(result => {
           console.log('------------------', result)
+          localStorage.userId = this.userInfo.userId
           this.goToSurvey()
         })
         .catch(err => {
@@ -245,4 +251,8 @@ export default {
 #btn:hover {
   box-shadow: 0 0 8px 5px rgba(6, 217, 224, 0.3);
 }
+.container .row{
+  height: 1440px !important;
+}
+
 </style>

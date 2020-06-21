@@ -1,39 +1,27 @@
 <template>
   <div id="app">
     <router-view />
-    <footer class="footer">
-      <div class="container">
-        <div class="col-12">
-          <p class="text-center">By Kamran Miadi</p>
-          <a href="https://github.com/KamranMiadi">github.com/KamranMiadi</a>
-        </div>
-      </div>
-    </footer>
+    <my-footer />
   </div>
 </template>
-
 <script>
 // import $ from 'jquery'
+import Footer from './components/Footer.vue'
 import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import $ from 'jquery'
-// Install BootstrapVue
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue' // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
 export default {
   name: 'App',
+  components: {
+    'my-footer': Footer
+  },
   data () {
     return {}
   },
-  mounted () {
-    $(document).ready(function () {
-      $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active')
-      })
-    })
-  }
+  mounted () {}
 }
 </script>
 
@@ -60,18 +48,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.fluid-container.footer {
-  background: rgb(11, 161, 124);
-  position: fixed;
-  bottom: 0;
-}
-.fluid-container.footer > *:last-child {
-  margin-bottom: 0px;
-  color: #fff;
-}
-footer {
-  position: fixed;
-  align-self: center;
-  bottom: 0;
-}
+
 </style>

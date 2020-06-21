@@ -43,7 +43,7 @@
               <div class="col-1"></div>
             </div>
           </form>
-          <span>ازمون {{currentQuiz + 1}} از {{totalQuiz}}</span>
+          <span>ازمون {{currentQuiz}} از {{totalQuiz}}</span>
         </div>
       </div>
     </div>
@@ -53,6 +53,7 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+const axios = require('axios')
 export default {
   name: 'Survey',
   data () {
@@ -2854,7 +2855,7 @@ export default {
         ]
       },
       totalQuiz: 3,
-      currentQuiz: 0,
+      currentQuiz: 1,
       currentQuizName: 'firstQuiz',
       firstScore: 0,
       secondScore: {
@@ -2871,27 +2872,32 @@ export default {
     created () {},
     progress () {},
     next () {
-      if (this.currentQuiz <= this.totalQuiz - 1) {
+      if (this.currentQuiz < this.totalQuiz) {
         this.currentQuiz += 1
-        if (this.currentQuiz === 0) {
+        if (this.currentQuiz === 1) {
           this.currentQuizName = 'firstQuiz'
-        } else if (this.currentQuiz === 1) {
+        } else if (this.currentQuiz === 2) {
           this.currentQuizName = 'secondQuiz'
         } else {
           this.currentQuizName = 'thirdQuiz'
           this.buttonText = 'محاسبه نمره'
         }
-      } else if (this.currentQuiz > this.totalQuiz - 1) {
+      } else if (this.currentQuiz === this.totalQuiz) {
         this.calcScore()
+        this.sendScore()
+        alert(' شما به همه سوالات پاسخ داده اید. با تشکر از همکاری شما.')
+        this.currentQuiz = '?'
+      } else if (this.currentQuiz === '?') {
+        alert('شما به همه سوالات پاسخ داده اید.')
       }
     },
     mounted () {},
     calcScore () {
       this.questions.firstQuiz.forEach(element => {
-        this.questions.firstScore += element.pickedAnswer
+        this.firstScore += element.pickedAnswer
       })
       this.questions.thirdQuiz.forEach(element => {
-        this.questions.thirdScore += element.pickedAnswer
+        this.thirdScore += element.pickedAnswer
       })
       this.questions.secondQuiz.forEach(element => {
         if (element.group === 'M') {
@@ -2904,6 +2910,27 @@ export default {
           this.secondScore.S += element.pickedAnswer
         }
       })
+    },
+    sendScore () {
+      const userScore = {
+        userId: localStorage.userId,
+        score: `first score: ${this.firstScore},
+        second score: (M:${this.secondScore.M}, P:${this.secondScore.P}, V:${this.secondScore.V}, S:${this.secondScore.S}),
+        third score: ${this.thirdScore}`
+      }
+      const options = {
+        method: 'POST',
+        url: 'http://localhost:8080/score',
+        data: userScore
+      }
+      axios(options)
+        .then(result => {
+          console.log('------------------', result)
+        })
+        .catch(err => {
+          console.log('------------------', err)
+          alert('خطا در ارسال اطلاعات کاربر به سرور.')
+        })
     },
     onSubmit () {
       console.log('------------------')
@@ -2948,4 +2975,5 @@ export default {
   background-color: chocolate;
   border-radius: 20px;
 }
+
 </style>
