@@ -7,7 +7,7 @@
             <fieldset class="mb-2">
               <legend>اطلاعات شخصی</legend>
               <div class="form-group">
-                <label for="userId">شماره دانشجویی :</label>
+                <label for="userId">*شماره دانشجویی :</label>
                 <input
                   id="userId"
                   class="form-control"
@@ -25,7 +25,6 @@
                   type="text"
                   placeholder="نام خود را وارد کنید "
                   v-model="userInfo.firstName"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -36,13 +35,12 @@
                   type="text"
                   placeholder="نام خانوادگی خود را وارد کنید "
                   v-model="userInfo.lastName"
-                  required
                 />
               </div>
-                 <div class="form-group">
-                <label for="major">رشته تحصیلی :</label>
-                <select class="form-control" v-model="userInfo.major">
-                  <option disabled value>رشته تحصیلی خود را انتخاب کنید</option>
+              <div class="form-group">
+                <label for="major">*رشته تحصیلی :</label>
+                <select class="form-control" v-model="userInfo.major" required>
+                  <option disabled value>.رشته تحصیلی خود را انتخاب کنید</option>
                   <option>مهندسی</option>
                   <option>پزشکی</option>
                 </select>
@@ -55,7 +53,6 @@
                   type="text"
                   placeholder="سن خود را وارد کنید "
                   v-model="userInfo.age"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -66,7 +63,6 @@
                   type="text"
                   placeholder="درصد زبان انگلیسی خود را وارد کنید "
                   v-model="userInfo.engPerc"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -77,7 +73,6 @@
                   type="text"
                   placeholder="استان محل تحصیل دبیرستان خود را وارد کنید "
                   v-model="userInfo.province"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -99,7 +94,9 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="accessToMedia">آیا به برنامه های رادیویی و تلویزیونی انگلیسی دسترسی دارید؟</label>
+                <label
+                  for="accessToMedia"
+                >آیا به برنامه های رادیویی و تلویزیونی انگلیسی دسترسی دارید؟</label>
                 <select class="form-control" v-model="userInfo.accessToMedia">
                   <option disabled value>انتخاب کنید</option>
                   <option>بله</option>
@@ -107,18 +104,22 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="accessToEngMen"> در خارج از کلاس چندبار با یک انگلیسی زبان ارتباط داشته اید؟</label>
+                <label
+                  for="accessToEngMen"
+                >در خارج از کلاس چندبار با یک انگلیسی زبان ارتباط داشته اید؟</label>
                 <select class="form-control" v-model="userInfo.accessToEngMen">
                   <option disabled value>انتخاب کنید</option>
                   <option>اصلا</option>
                   <option>خیلی کم</option>
                   <option>گاهی اوقات</option>
-                  <option>اغلب </option>
+                  <option>اغلب</option>
                   <option>خیلی زیاد</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="accessToMedia"> آیا تا به حال به کشورهای انگلیسی زبان سفر کرده یا در آن ها زندگی کرده اید؟</label>
+                <label
+                  for="accessToMedia"
+                >آیا تا به حال به کشورهای انگلیسی زبان سفر کرده یا در آن ها زندگی کرده اید؟</label>
                 <select class="form-control" v-model="userInfo.hasTraveled">
                   <option disabled value>انتخاب کنید</option>
                   <option>بله</option>
@@ -126,7 +127,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="startedAt"> چه زمانی شروع به یادگیری زبان انگلیسی کرده اید؟</label>
+                <label for="startedAt">چه زمانی شروع به یادگیری زبان انگلیسی کرده اید؟</label>
                 <select class="form-control" v-model="userInfo.startedLearningAt">
                   <option disabled value>انتخاب کنید</option>
                   <option>پیش دبستانی</option>
@@ -135,15 +136,14 @@
                   <option>سال اول دبیرستان</option>
                 </select>
               </div>
-                <div class="form-group">
+              <div class="form-group">
                 <label for="learningTime">چند سال است که در حال یادگیری زبان انگلیسی هستید؟</label>
                 <input
                   id="learningTime"
                   class="form-control"
                   type="text"
-                  placeholder=""
+                  placeholder
                   v-model="userInfo.learningTime"
-                  required
                 />
               </div>
             </fieldset>
@@ -206,19 +206,23 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'http://localhost:8080/personalInfo',
+        url: 'http://127.0.0.1:3000/personalInfo',
         data: userInfo
       }
-      axios(options)
-        .then(result => {
-          console.log('------------------', result)
-          localStorage.userId = this.userInfo.userId
-          this.goToSurvey()
-        })
-        .catch(err => {
-          console.log('------------------', err)
-          alert('خطا در ارسال اطلاعات کاربر به سرور.')
-        })
+      if (userInfo.userId === '' || userInfo.major === '') {
+        alert('لطفا شماره دانشجویی و رشته خود را وارد کنید.')
+      } else {
+        axios(options)
+          .then(result => {
+            console.log('------------------', result)
+            localStorage.userId = this.userInfo.userId
+            this.goToSurvey()
+          })
+          .catch(err => {
+            console.log('------------------', err)
+            alert('خطا در ارسال اطلاعات کاربر به سرور.')
+          })
+      }
     }
   }
 }
@@ -251,8 +255,7 @@ export default {
 #btn:hover {
   box-shadow: 0 0 8px 5px rgba(6, 217, 224, 0.3);
 }
-.container .row{
+.container .row {
   height: 1440px !important;
 }
-
 </style>

@@ -2920,7 +2920,7 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'http://localhost:8080/score',
+        url: 'http://127.0.0.1:3000/score',
         data: userScore
       }
       axios(options)
