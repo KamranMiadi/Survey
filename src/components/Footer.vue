@@ -2,6 +2,7 @@
   <div id="Footer">
     <div class="container main-container">
       <div class="row align-items-center justify-content-center" style="height: 700px;">
+        <p>By Kamran Miadi.</p>
       </div>
     </div>
   </div>
@@ -21,13 +22,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#Footer .container .row{
-  height: 60px !important;
-  bottom: 0 !important;
-  text-align: center !important;
-  align-self: center !important;
-  align-items: center !important;
-  align-content: center !important;
-  position: absolute;
+#Footer {
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0 25px;
+  flex: 0 0 auto;
+  z-index: 2;
+  position: relative;
 }
 </style>

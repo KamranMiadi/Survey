@@ -1,19 +1,19 @@
 <template>
   <div id="Survey">
-    <div class="guide pt-3 pb-3 col-6 col-sm-3 mr-4 mt-4">
-      <b-button v-b-toggle.sidebar-1 >راهنمای گزینه ها</b-button>
-      <b-sidebar id="sidebar-1" title="راهنما" right bg-variant="dark" text-variant="light" shadow>
-        <label for="guid">راهنمای گزینه ها</label>
-        <ul id="guide">
-          <li
-            v-for="(item, index) in questions[currentQuizName + 'Guide']"
-            v-bind:key="index"
-          >{{ item }}</li>
-        </ul>
-      </b-sidebar>
-    </div>
-
     <div class="container main-container">
+      <div class="row align-items-center justify-content-center ">
+        <div class="guide guide-pos pt-3 pb-3 col-9 col-sm-8 col-lg-6 mt-4 ">
+          <div>
+            <label for="guid">راهنمای گزینه ها</label>
+            <ul id="guide">
+              <li
+                v-for="(item, index) in questions[currentQuizName + 'Guide']"
+                v-bind:key="index"
+              >{{ item }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="row align-items-center justify-content-center" style="height: 700px;">
         <div id="form" class="border-0 col-9 col-sm-10 col-lg-10 pb-4 pt-4 mt-4 mb-4">
           <form class="mb-4" v-on:submit.prevent="onSubmit">
@@ -2920,7 +2920,7 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'http://127.0.0.1:3000/score',
+        url: 'https://survey-hamid-soodmand.liara.run/score',
         data: userScore
       }
       axios(options)
@@ -2944,6 +2944,7 @@ export default {
 #form {
   background-color: rgb(27, 85, 71);
   border-radius: 20px;
+  margin-top: 380px !important;
 }
 
 #firstName,
@@ -2976,4 +2977,9 @@ export default {
   border-radius: 20px;
 }
 
+.guide-pos {
+  position: fixed ;
+  z-index: 2;
+  top : 0;
+}
 </style>

@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <router-view />
-    <my-footer />
+    <footer>
+      <div id="Footer">
+         <p>By Kamran Miadi.</p>
+         <p>kamy.mia74@gmail.com</p>
+         <a class="a" href="https://github.com/KamranMiadi">github.com/KamranMiadi</a>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
 // import $ from 'jquery'
-import Footer from './components/Footer.vue'
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue' // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -15,9 +20,6 @@ Vue.use(IconsPlugin)
 
 export default {
   name: 'App',
-  components: {
-    'my-footer': Footer
-  },
   data () {
     return {}
   },
@@ -32,7 +34,7 @@ body {
   position: relative;
   text-align: right !important;
   font-family: "Vazir", sans-serif;
-  direction: rtl;
+  direction: ltr;
 }
 #body {
   background-color: rgb(11, 63, 60);
@@ -48,5 +50,28 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+footer {
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0 25px;
+  flex: 0 0 auto;
+  z-index: 2;
+  position: relative;
+  margin-top: 1440px;
 
+}
+.a {
+text-decoration: none;
+color: white;
+}
+.a :link {
+  color: #fff;
+}
+ .a :hover {
+  text-decoration: none;
+}
+.a :visited {
+  color: orange;
+}
 </style>
