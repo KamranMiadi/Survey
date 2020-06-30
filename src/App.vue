@@ -34,7 +34,7 @@ body {
   position: relative;
   text-align: right !important;
   font-family: "Vazir", sans-serif;
-  direction: ltr;
+  direction: rtl;
 }
 #body {
   background-color: rgb(11, 63, 60);
@@ -59,7 +59,7 @@ footer {
   z-index: 2;
   position: relative;
   margin-top: 1440px;
-
+  direction: ltr;
 }
 .a {
 text-decoration: none;
