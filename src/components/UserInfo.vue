@@ -206,7 +206,7 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'http://127.0.0.1/personalInfo',
+        url: 'http://127.0.0.1:3000/personalInfo',
         data: userInfo
       }
       if (userInfo.userId === '' || userInfo.major === '') {

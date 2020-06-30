@@ -2890,6 +2890,7 @@ export default {
       } else if (this.currentQuiz === '?') {
         alert('شما به همه سوالات پاسخ داده اید.')
       }
+      window.scrollTo(0, 0)
     },
     mounted () {},
     calcScore () {
