@@ -206,7 +206,7 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'https://survey-hamid-soodmand.liara.run/personalInfo',
+        url: 'http://127.0.0.1/personalInfo',
         data: userInfo
       }
       if (userInfo.userId === '' || userInfo.major === '') {
