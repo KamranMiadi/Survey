@@ -688,7 +688,7 @@ export default {
           }
         ],
         secondQuizGuide: [
-          'کاملا مخالف',
+          '0-کاملا مخالف',
           '',
           '',
           '',
@@ -698,7 +698,7 @@ export default {
           '',
           '',
           '',
-          'کاملا موافق'
+          '10-کاملا موافق'
         ],
         secondQuizHeader: 'مقیاس منبع خودباوری',
         secondQuizDesc:
@@ -1814,7 +1814,7 @@ export default {
           },
           {
             text:
-              '3. آیا می توانید برنامه های تلویزیونی انگلیسیبا لهجه آمریکایی را بفهمید؟',
+              '3. آیا می توانید برنامه های تلویزیونی انگلیسی با لهجه آمریکایی را بفهمید؟',
             answers: [
               {
                 text: 1,
@@ -2880,12 +2880,12 @@ export default {
           this.currentQuizName = 'secondQuiz'
         } else {
           this.currentQuizName = 'thirdQuiz'
-          this.buttonText = 'محاسبه نمره'
+          this.buttonText = 'ثبت'
         }
       } else if (this.currentQuiz === this.totalQuiz) {
         this.calcScore()
         this.sendScore()
-        alert(' شما به همه سوالات پاسخ داده اید. با تشکر از همکاری شما.')
+        this.$router.push({ name: 'LastPage' })
         this.currentQuiz = '?'
       } else if (this.currentQuiz === '?') {
         alert('شما به همه سوالات پاسخ داده اید.')

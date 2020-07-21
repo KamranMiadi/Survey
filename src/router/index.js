@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserInfo from '../components/UserInfo.vue'
 import Survey from '../components/Survey.vue'
+import LastPage from '../components/LastPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/survey',
     name: 'Survey',
     component: Survey
+  },
+  {
+    path: '/endSurvey',
+    name: 'LastPage',
+    component: LastPage
   }
 ]
 

@@ -38,6 +38,7 @@ body {
   position: relative !important;
   display: block !important;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

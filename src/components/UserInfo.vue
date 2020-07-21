@@ -7,42 +7,13 @@
             <fieldset class="mb-2">
               <legend>اطلاعات شخصی</legend>
               <div class="form-group">
-                <label for="userId">*شماره دانشجویی :</label>
-                <input
-                  id="userId"
-                  class="form-control"
-                  type="text"
-                  placeholder="شماره دانشجویی خود را وارد کنید "
-                  v-model="userInfo.userId"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="firstName">نام :</label>
-                <input
-                  id="firstName"
-                  class="form-control"
-                  type="text"
-                  placeholder="نام خود را وارد کنید "
-                  v-model="userInfo.firstName"
-                />
-              </div>
-              <div class="form-group">
-                <label for="lastName">نام خانوادگی :</label>
-                <input
-                  id="lastName"
-                  class="form-control"
-                  type="text"
-                  placeholder="نام خانوادگی خود را وارد کنید "
-                  v-model="userInfo.lastName"
-                />
-              </div>
-              <div class="form-group">
                 <label for="major">*رشته تحصیلی :</label>
                 <select class="form-control" v-model="userInfo.major" required>
                   <option disabled value>.رشته تحصیلی خود را انتخاب کنید</option>
                   <option>مهندسی</option>
                   <option>پزشکی</option>
+                  <option>داروسازی</option>
+                  <option>دندان پزشکی</option>
                 </select>
               </div>
               <div class="form-group">
@@ -190,8 +161,6 @@ export default {
     sendUserInfo () {
       const userInfo = {
         userId: this.userInfo.userId,
-        firstName: this.userInfo.firstName,
-        lastName: this.userInfo.lastName,
         major: this.userInfo.major,
         age: this.userInfo.age,
         gender: this.userInfo.gender,
@@ -206,16 +175,16 @@ export default {
       }
       const options = {
         method: 'POST',
-        url: 'http://127.0.0.1:3000/personalInfo',
+        url: 'https://survey-hamid-soodmand.liara.run/personalInfo',
         data: userInfo
       }
-      if (userInfo.userId === '' || userInfo.major === '') {
-        alert('لطفا شماره دانشجویی و رشته خود را وارد کنید.')
+      if (userInfo.major === '') {
+        alert('لطفا رشته خود را وارد کنید.')
       } else {
         axios(options)
           .then(result => {
             console.log('------------------', result)
-            localStorage.userId = this.userInfo.userId
+            localStorage.userId = result.data.response.userId
             this.goToSurvey()
           })
           .catch(err => {
